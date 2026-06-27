@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roy Event Management | Premium Wedding & Corporate Events</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #1a1a1a;
+            --primary-gold: #d4af37;
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --light-bg: #f8f7f3;
+            --text-dark: #2d2d2d;
+            --text-light: #666666;
+            --white: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.3) 0%, rgba(30, 58, 138, 0.85) 100%), url('images/best.png') fixed center/cover;
+            background-attachment: fixed;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--primary-gold);
+            color: var(--primary-dark);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.1s ease;
+            border: 2px solid var(--primary-gold);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--primary-gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.4) 0%, rgba(30, 58, 138, 0.4) 100%), url('Wedding%20Decor%201.png') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+            background-attachment: fixed;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(62, 138, 247, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            width: 100%;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--primary-gold);
+            color: var(--primary-dark);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-gold);
+            padding: 1rem 2rem;
+            border: 2px solid var(--primary-gold);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-gold);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            position: relative;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(62, 138, 247, 0.2) 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-image-placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .stars {
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+        }
+
+        .rating-text {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Services Section */
+        .services {
+            background: var(--light-bg);
+            padding: 6rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .services-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            position: relative;
+        }
+
+        .service-card-image {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(62, 138, 247, 0.1) 100%);
+        }
+
+        .service-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover .service-card-image img {
+            transform: scale(1.05);
+        }
+
+        .service-card-content {
+            padding: 2rem;
+            position: relative;
+        }
+
+        .service-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--primary-gold);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.2);
+        }
+
+        .service-card::before {
+            display: none;
+        }
+
+        .service-card:hover::before {
+            display: none;
+        }
+
+        .service-icon {
+            display: none;
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+            text-align: left;
+        }
+
+        .service-card:hover h3 {
+            color: var(--primary-gold);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            text-align: left;
+        }
+
+        .service-card:hover p {
+            color: var(--text-dark);
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background: var(--primary-dark);
+            padding: 6rem 2rem;
+            color: var(--white);
+        }
+
+        .pricing-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .pricing .section-header {
+            color: var(--white);
+        }
+
+        .pricing .section-header h2 {
+            color: var(--primary-gold);
+        }
+
+        .pricing .section-header p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--primary-gold);
+            background: rgba(212, 175, 55, 0.1);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary-gold);
+            background: rgba(212, 175, 55, 0.15);
+            transform: scale(1.05);
+        }
+
+        .pricing-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-gold);
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 1rem 0;
+            color: var(--primary-gold);
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features li::before {
+            content: '✓ ';
+            color: var(--primary-gold);
+            font-weight: 700;
+            margin-right: 0.5rem;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background: var(--light-bg);
+            padding: 6rem 2rem;
+        }
+
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            height: 300px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(62, 138, 247, 0.2) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 26, 26, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .overlay-text {
+            color: var(--primary-gold);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--primary-dark);
+            padding: 6rem 2rem;
+            color: var(--white);
+        }
+
+        .testimonials-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .testimonials .section-header h2 {
+            color: var(--primary-gold);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--primary-gold);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .stars-review {
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-gold);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--light-bg);
+            padding: 6rem 2rem;
+        }
+
+        .contact-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--primary-dark);
+        }
+
+        .contact-item {
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            flex-shrink: 0;
+        }
+
+        .contact-item p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .contact-item a {
+            color: var(--primary-dark);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--primary-gold);
+        }
+
+        .contact-item a p {
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item a:hover p {
+            color: var(--primary-gold);
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 247, 243, 0.98) 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3), 0 0 0 1px rgba(212, 175, 55, 0.2);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gold) 0%, var(--secondary-blue) 50%, #ff6b9d 100%);
+        }
+
+        .contact-form::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(62, 138, 247, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            border-radius: 20px;
+        }
+
+        .contact-form h3 {
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--secondary-blue) 50%, #ff6b9d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2), inset 0 0 0 1px rgba(212, 175, 55, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--secondary-blue) 50%, #ff6b9d 100%);
+            color: var(--white);
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            letter-spacing: 1px;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(212, 175, 55, 0.2);
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-gold);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-gold);
+            color: var(--primary-dark);
+            border-color: var(--primary-gold);
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-image {
+                height: 350px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .services-container,
+            .gallery-grid,
+            .pricing-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .service-card:hover {
+                transform: translateY(-10px);
+            }
+
+            .service-card-image {
+                height: 200px;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .nav-links {
+                gap: 0.8rem;
+            }
+
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-content p {
+                font-size: 0.9rem;
+            }
+
+            .price {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">ROY EVENTS</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#contact" class="cta-button">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Craft Your Royal Celebration</h1>
+                <p>Transform your dreams into unforgettable moments with premium event management, exquisite decor, and meticulous attention to every detail.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary">Book Now</a>
+                </div>
+                <div class="rating">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <div class="rating-text">4.9/5 (62 Reviews)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="services-container">
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <p>Comprehensive event management solutions tailored to your vision</p>
+            </div>
+        </div>
+        <div class="services-container" style="margin-top: 3rem;">
+            <div class="service-card wedding-engagement">
+                <div class="service-card-image">
+                    <img src="images/Wedding & Engagement.png" alt="Wedding & Engagement">
+                </div>
+                <div class="service-card-content">
+                    <div class="service-number">01</div>
+                    <h3>Wedding & Engagement</h3>
+                    <p>Complete wedding planning from intimate ceremonies to grand celebrations. Haldi, Mehendi, Sangeet, and Reception management with premium decor and coordination.</p>
+                </div>
+            </div>
+            <div class="service-card birthday-anniversary">
+                <div class="service-card-image">
+                    <img src="images/Birthday & Anniversary.png" alt="Birthday & Anniversary">
+                </div>
+                <div class="service-card-content">
+                    <div class="service-number">02</div>
+                    <h3>Birthday & Anniversary</h3>
+                    <p>Celebrate milestones with personalized themes, creative decorations, and flawless execution. Photo corners, props, and entertainment included.</p>
+                </div>
+            </div>
+            <div class="service-card corporate-events">
+                <div class="service-card-image">
+                    <img src="images/Corporate Event.png" alt="Corporate Events">
+                </div>
+                <div class="service-card-content">
+                    <div class="service-number">03</div>
+                    <h3>Corporate Events</h3>
+                    <p>Professional event management for launches, conferences, and corporate gatherings. Vendor management, technical setup, and seamless coordination.</p>
+                </div>
+            </div>
+            <div class="service-card entertainment-music">
+                <div class="service-card-image">
+                    <img src="images/Entertainment & Music.png" alt="Entertainment & Music">
+                </div>
+                <div class="service-card-content">
+                    <div class="service-number">04</div>
+                    <h3>Entertainment & Music</h3>
+                    <p>Live orchestra, DJ services, entertainment shows, and cultural performances. Create the perfect ambiance for your celebration.</p>
+                </div>
+            </div>
+            <div class="service-card premium-decor">
+                <div class="service-card-image">
+                    <img src="images/Premium Decor.png" alt="Premium Decor">
+                </div>
+                <div class="service-card-content">
+                    <div class="service-number">05</div>
+                    <h3>Premium Decor</h3>
+                    <p>Luxurious decorations featuring royal blue, crystal sparkle, and lush florals. Grand stage backdrops, candlelit pathways, and curated tablescapes.</p>
+                </div>
+            </div>
+            <div class="service-card photography-videography">
+                <div class="service-card-image">
+                    <img src="images/Photography & Videography.png" alt="Photography & Videography">
+                </div>
+                <div class="service-card-content">
+                    <div class="service-number">06</div>
+                    <h3>Photography & Videography</h3>
+                    <p>Professional photography and videography services capturing every precious moment of your event with artistic precision.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="gallery-container">
+            <div class="section-header">
+                <h2>Our Portfolio</h2>
+                <p>Stunning celebrations crafted with precision and elegance</p>
+            </div>
+            <div class="gallery-grid" style="margin-top: 3rem;">
+                <div class="gallery-item">
+                    <img src="images/decor.png" alt="decor">
+                    <div class="gallery-overlay">
+                        <span class="overlay-text">Royal Wedding</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/Wedding Decor 1.png" alt="Wedding Decor 1">
+                    <div class="gallery-overlay">
+                        <span class="overlay-text">Royal Wedding</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/Haldi Ceremony.png" alt="Haldi Ceremony">
+                    <div class="gallery-overlay">
+                        <span class="overlay-text">Haldi Setup</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/Sangeet Night.png" alt="Sangeet Night">
+                    <div class="gallery-overlay">
+                        <span class="overlay-text">Sangeet Decor</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/Reception Hall.png" alt="Reception Hall">
+                    <div class="gallery-overlay">
+                        <span class="overlay-text">Reception Setup</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/Mahendi Ceremony.png" alt="Mehendi Ceremony">
+                    <div class="gallery-overlay">
+                        <span class="overlay-text">Mehendi Decor</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/Corporate Event.png" alt="Corporate Event">
+                    <div class="gallery-overlay">
+                        <span class="overlay-text">Corporate Setup</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/best.png" alt="best">
+                    <div class="gallery-overlay">
+                        <span class="overlay-text">Royal Wedding</span>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="testimonials-container">
+            <div class="section-header">
+                <h2>Client Reviews</h2>
+                <p>What our happy clients say about Roy Event Management</p>
+            </div>
+            <div class="testimonials-grid" style="margin-top: 3rem;">
+                <div class="testimonial-card">
+                    <div class="stars-review">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Best event management company and good response towards customers. They understood our vision perfectly and executed it flawlessly."</p>
+                    <p class="testimonial-author">- Satisfied Client</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars-review">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"High quality maintenance and good work. The attention to detail was exceptional. Every corner was perfect!"</p>
+                    <p class="testimonial-author">- Happy Couple</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars-review">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"They added small details like photo corners and fun props that made our celebration truly special. Highly recommended!"</p>
+                    <p class="testimonial-author">- Event Host</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Get In Touch</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <p><strong>Phone</strong></p>
+                        <a href="tel:+919954242146">+91 9954 242146</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <p><strong>Address</strong></p>
+                        <a href="https://www.google.com/maps/search/4th+floor+Omkar+Nagar+Opp+Agastya+Hospitals+Hyderabad" target="_blank" style="text-decoration: none; color: var(--text-light); transition: color 0.3s ease; cursor: pointer; display: inline-block;">
+                            <p style="margin: 0;">4th Floor, Omkar Nagar<br>Opp. Agastya Hospitals<br>Jahangir Nagar Colony<br>L. B. Nagar, Hyderabad<br>Telangana 500079</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div>
+                        <p><strong>Follow Us</strong></p>
+                        <p><a href="https://instagram.com/roy.eventsindia" target="_blank">Instagram: @roy.eventsindia</a></p>
+                        <p>2.2K+ Followers</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">⏰</div>
+                    <div>
+                        <p><strong>Hours</strong></p>
+                        <p>Available 7 Days a Week<br>Open until 10:30 PM</p>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form">
+                <h3>Send us a Message</h3>
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="event">Event Type</label>
+                    <input type="text" id="event" name="event" placeholder="Wedding, Birthday, Corporate, etc." required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="form-submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">ROY EVENT MANAGEMENT</div>
+            <p>Crafting Royal Weddings | Corporate Events | Premium Celebrations</p>
+            <div class="social-links">
+                <a href="https://instagram.com/roy.eventsindia" target="_blank" title="Instagram">📷</a>
+                <a href="tel:+919954242146" title="Call Us">📞</a>
+                <a href="#contact" title="Contact">✉️</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Roy Event Management. All rights reserved. | Premium Events Crafted with Excellence</p>
+                <p>Hyderabad, Telangana</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const element = document.querySelector(href);
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Form submission handling
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you shortly.');
+            this.reset();
+        });
+
+        // Active nav link on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.style.color = '#d4af37';
+                } else {
+                    link.style.color = 'white';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
